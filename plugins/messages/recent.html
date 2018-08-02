@@ -1,0 +1,35 @@
+<div id="header-action-contacts" class="header-action"></div>
+<div class="panel-container">
+    <div class="path-messages recent-messages">
+        <% if (messages.length > 0) {%>
+        <ul class="nav nav-v">
+            <% _.each(messages, function(message) { %>
+            <% var user = contacts[message.user]; %>
+            <li class="nav-item recent-conversation">
+                <a class="media touch-row" href="#messages/conversation/<%= message.user %>">
+                    <div class="img">
+                        <% if (user.profileimageurl) { %>
+                        <img src="<%= MM.util.getMoodleFilePath(user.profileimageurl) %>">
+                        <% } else { %>
+                        <img src="img/userimage.png">
+                        <% } %>
+                    </div>
+                    <div class="bd">
+                        <p><%= user.fullname %></p>
+
+                        <% if (user.unread) { %>
+                        <p class="preview unread">
+                        <% } else { %>
+                        <p class="preview">
+                        <% } %>
+                        <%= MM.util.shortenText(MM.util.formatText(message.message, true), 32) %></p>
+                    </div>
+                </a>
+            </li>
+            <% }); %>
+        </ul>
+        <% } else { %>
+        <h3><strong><%= MM.lang.s("nomessagesfound") %></strong></h3>
+        <% } %>
+    </div>
+</div>
